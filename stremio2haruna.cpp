@@ -100,11 +100,11 @@ void Stremio2Haruna::onClipboardChanged() {
 void Stremio2Haruna::onToggleEnabled(bool enabled) {
   m_enabled = enabled;
 
-  // Optionally change the tray icon to indicate state
+  // Stop or start clipboard polling based on enabled state
   if (m_enabled) {
-    m_trayIcon->setIcon(QIcon::fromTheme("media-playback-start"));
+    m_clipboardTimer->start(m_pollingRate);
   } else {
-    m_trayIcon->setIcon(QIcon::fromTheme("media-playback-pause"));
+    m_clipboardTimer->stop();
   }
 }
 
@@ -230,17 +230,30 @@ void Stremio2Haruna::openConfigDialog() {
   // Set current values
   dialog.setPollingRateMs(m_pollingRate);
   dialog.setLaunchDelayMs(m_launchDelay);
+  dialog.setEnabled(m_enabled);
+
+  // Connect quit signal
+  connect(&dialog, &ConfigDialog::quitRequested, this, &Stremio2Haruna::onQuit);
 
   // Show dialog and wait for user response
   if (dialog.exec() == QDialog::Accepted) {
     // User clicked Save - apply new settings
     m_pollingRate = dialog.getPollingRateMs();
     m_launchDelay = dialog.getLaunchDelayMs();
+    m_enabled = dialog.getEnabled();
+
+    // Update tray menu checkbox to reflect new state
+    m_enabledAction->setChecked(m_enabled);
 
     // Save to persistent storage
     saveSettings();
 
-    // Apply new polling rate to timer
+    // Apply new polling rate and stop/start timer based on enabled state
     m_clipboardTimer->setInterval(m_pollingRate);
+    if (m_enabled) {
+      m_clipboardTimer->start(m_pollingRate);
+    } else {
+      m_clipboardTimer->stop();
+    }
   }
 }
