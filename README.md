@@ -124,8 +124,19 @@ sudo make install
 
 ## License
 
-This project is open source. Feel free to modify and distribute as needed.
+This project is licensed under the **GNU General Public License v3.0** (GPLv3).
+
+You are free to:
+- Use this software for any purpose
+- Study and modify the source code
+- Distribute copies
+- Distribute modified versions
+
+All derivative works must also be licensed under GPLv3. See the [LICENSE](LICENSE) file for full details.
 
 ## Contributing
 
-Contributions, bug reports, and feature requests are welcome!
+Contributions, bug reports, and feature requests are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+
+For questions or discussions, feel free to open an issue on GitHub.
+
