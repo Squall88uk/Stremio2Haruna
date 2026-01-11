@@ -6,10 +6,12 @@ A Qt6-based system tray application for KDE Plasma (Wayland) that automatically 
 
 - 🎯 Monitors clipboard for URLs when Stremio is running
 - ⚙️ **Configurable polling rate and launch delay via settings dialog**
+- ✅ **Enable/Disable monitoring from settings dialog or tray menu**
+- 🚪 **Quit application directly from settings dialog**
 - ⏱️ Default 2.5s delay before launching Haruna (gives you time to close/pause Stremio)
 - 🎬 Automatically pauses monitoring while Haruna is playing (no fullscreen interference)
 - 🔄 Auto-resumes monitoring when you close Haruna
-- 🔘 Easy enable/disable toggle via system tray menu
+- 💤 Stops all background activity when disabled (saves CPU)
 - 🚀 Launches Haruna media player with the copied URL
 - 💻 Native Qt6 application optimized for KDE Plasma on Wayland
 
@@ -72,10 +74,12 @@ sudo make install
 
 2. The application will run in the background with a system tray icon
 
-3. **Configure settings (NEW in v1.1.0):**
+3. **Configure settings (v1.1.0+):**
    - Left-click the tray icon to open settings dialog
    - Adjust **Clipboard Polling Rate** (0.5s - 10.0s, default: 3.5s)
    - Adjust **Launch Delay** (0.0s - 10.0s, default: 2.5s)
+   - Toggle **Enable Monitoring** checkbox to enable/disable
+   - Click **Quit Application** to close the app
    - Click Save to apply changes
    - Settings are saved automatically and persist between sessions
 
