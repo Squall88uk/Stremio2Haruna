@@ -20,6 +20,9 @@ Stremio2Haruna::Stremio2Haruna(QObject *parent)
   // Load settings from QSettings
   loadSettings();
 
+  // Clear any existing URLs from clipboard before starting
+  clearClipboardUrls();
+
   setupSystemTray();
 
   connect(m_clipboard, &QClipboard::dataChanged, this,
@@ -306,5 +309,54 @@ void Stremio2Haruna::openConfigDialog() {
     } else {
       m_clipboardTimer->stop();
     }
+  }
+}
+
+void Stremio2Haruna::clearClipboardUrls() {
+  const int maxIterations = 10; // Safety limit to prevent infinite loops
+  int iteration = 0;
+
+  while (iteration < maxIterations) {
+    // Read current clipboard content using wl-paste
+    QProcess process;
+    process.start("wl-paste", QStringList() << "-n");
+
+    if (!process.waitForFinished(100)) {
+      process.kill();
+      break;
+    }
+
+    QString clipboardText =
+        QString::fromUtf8(process.readAllStandardOutput()).trimmed();
+
+    // If clipboard is empty or contains non-URL content, we're done
+    if (clipboardText.isEmpty() || !isValidUrl(clipboardText)) {
+      break;
+    }
+
+    // URL detected - replace it with empty string to avoid clipboard manager
+    // auto-restore
+    QProcess clearProcess;
+    clearProcess.start("wl-copy", QStringList());
+    clearProcess.write(""); // Write empty string instead of using --clear
+    clearProcess.closeWriteChannel();
+
+    if (!clearProcess.waitForFinished(200)) {
+      clearProcess.kill();
+      break;
+    }
+
+    // Wait for clipboard to update
+    QThread::msleep(100);
+
+    iteration++;
+  }
+
+  // Initialize m_lastClipboardText to current (non-URL) content
+  QProcess process;
+  process.start("wl-paste", QStringList() << "-n");
+  if (process.waitForFinished(100)) {
+    m_lastClipboardText =
+        QString::fromUtf8(process.readAllStandardOutput()).trimmed();
   }
 }

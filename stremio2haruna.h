@@ -32,6 +32,7 @@ private:
   void setupSystemTray();
   void loadSettings();
   void saveSettings();
+  void clearClipboardUrls();
 
   QSystemTrayIcon *m_trayIcon;
   QMenu *m_trayMenu;

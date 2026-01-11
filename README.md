@@ -4,6 +4,7 @@ A Qt6-based system tray application for KDE Plasma (Wayland) that automatically 
 
 ## Features
 
+- 🧹 **Clears URLs from clipboard on launch** (prevents unwanted auto-launches from previously copied content)
 - 🎯 Monitors clipboard for URLs when Stremio is running
 - ⚙️ **Configurable polling rate and launch delay via settings dialog**
 - ✅ **Enable/Disable monitoring from settings dialog or tray menu**
@@ -14,6 +15,9 @@ A Qt6-based system tray application for KDE Plasma (Wayland) that automatically 
 - 💤 Stops all background activity when disabled (saves CPU)
 - 🚀 Launches Haruna media player with the copied URL
 - 💻 Native Qt6 application optimized for KDE Plasma on Wayland
+
+> [!WARNING]
+> **Clipboard Behavior**: Starting with v1.2.0, this application **automatically clears any URLs from your clipboard when it launches**. This prevents the application from detecting and processing URLs that were copied before the app started. Non-URL clipboard content is preserved.
 
 ## System Requirements
 
@@ -93,13 +97,14 @@ sudo make install
 
 ## How It Works
 
-1. **Clipboard Monitoring**: Uses `wl-paste` polling (default every 3.5s, configurable) to detect clipboard changes on Wayland
-2. **Stremio Detection**: Uses `kdotool` to check if Stremio is running
-3. **URL Validation**: Checks if the clipboard content is a valid URL with supported schemes  
-4. **Delay**: Waits (default 2.5s, configurable) to give you time to close/pause Stremio
-5. **Haruna Launch**: Launches Haruna media player with the URL and monitors the process
-6. **Auto Pause/Resume**: Stops clipboard polling while Haruna is running (prevents fullscreen glitches), automatically resumes when you close Haruna
-7. **Persistent Settings**: All configuration is saved using QSettings and persists between application restarts
+1. **Clipboard URL Clearing on Launch**: On startup, checks clipboard for URLs and clears them to prevent false triggers from previously copied content
+2. **Clipboard Monitoring**: Uses `wl-paste` polling (default every 3.5s, configurable) to detect clipboard changes on Wayland
+3. **Stremio Detection**: Uses `kdotool` to check if Stremio is running
+4. **URL Validation**: Checks if the clipboard content is a valid URL with supported schemes  
+5. **Delay**: Waits (default 2.5s, configurable) to give you time to close/pause Stremio
+6. **Haruna Launch**: Launches Haruna media player with the URL and monitors the process
+7. **Auto Pause/Resume**: Stops clipboard polling while Haruna is running (prevents fullscreen glitches), automatically resumes when you close Haruna
+8. **Persistent Settings**: All configuration is saved using QSettings and persists between application restarts
 
 ## Known Limitations
 
