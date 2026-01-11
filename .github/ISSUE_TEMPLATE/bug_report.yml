@@ -1,0 +1,150 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us resolve the issue.
+
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Tell us what happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Launch Stremio2Haruna
+        2. Open configuration dialog
+        3. Set polling rate to X
+        4. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: Describe what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Describe what actually happened
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Stremio2Haruna Version
+      description: What version of Stremio2Haruna are you using?
+      placeholder: "e.g., 1.1.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What operating system are you using?
+      options:
+        - CachyOS
+        - Arch Linux
+        - Manjaro
+        - EndeavourOS
+        - Other Arch-based
+        - Other Linux distribution
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS Version
+      description: What version of your OS are you using?
+      placeholder: "e.g., CachyOS 2026.01"
+
+  - type: dropdown
+    id: desktop
+    attributes:
+      label: Desktop Environment
+      description: What desktop environment are you using?
+      options:
+        - KDE Plasma 6 (Wayland)
+        - KDE Plasma 5 (Wayland)
+        - KDE Plasma (X11)
+        - Other (Wayland)
+        - Other (X11)
+    validations:
+      required: true
+
+  - type: input
+    id: qt-version
+    attributes:
+      label: Qt6 Version
+      description: What version of Qt6 is installed?
+      placeholder: "e.g., 6.6.1 (run: qmake6 --version)"
+
+  - type: dropdown
+    id: dependencies
+    attributes:
+      label: Are all dependencies installed?
+      description: wl-clipboard, kdotool, Stremio, Haruna
+      options:
+        - "Yes, all dependencies are installed"
+        - "No, some dependencies might be missing"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: |
+        Please copy and paste any relevant log output. Run Stremio2Haruna from terminal to see logs.
+        This will be automatically formatted into code, so no need for backticks.
+      render: shell
+      placeholder: |
+        Run: stremio2haruna
+        Then paste any error messages or warnings here
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here (screenshots, screen recordings, etc.)
+      placeholder: Any additional information that might help
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
