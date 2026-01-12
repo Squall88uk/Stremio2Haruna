@@ -79,7 +79,7 @@ After starting the application:
 
 ## 🐛 Bug Reports
 
-Report issues at: https://github.com/Squall88uk/Stremio2Haruna/issues
+Report issues at: https://github.com/Jen88uk/Stremio2Haruna/issues
 
 ## 📜 Full Changelog
 
@@ -113,5 +113,5 @@ Report issues at: https://github.com/Squall88uk/Stremio2Haruna/issues
 ---
 
 **Previous Releases**:
-- [v1.1.0](https://github.com/Squall88uk/Stremio2Haruna/releases/tag/v1.1.0)
-- [v1.0.0](https://github.com/Squall88uk/Stremio2Haruna/releases/tag/v1.0.0)
+- [v1.1.0](https://github.com/Jen88uk/Stremio2Haruna/releases/tag/v1.1.0)
+- [v1.0.0](https://github.com/Jen88uk/Stremio2Haruna/releases/tag/v1.0.0)

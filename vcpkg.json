@@ -3,7 +3,7 @@
   "name": "stremio2haruna",
   "version": "1.1.1",
   "description": "Qt6-based system tray application that automatically detects URLs copied in Stremio and launches them in Haruna media player",
-  "homepage": "https://github.com/Squall88uk/Stremio2Haruna",
+  "homepage": "https://github.com/Jen88uk/Stremio2Haruna",
   "license": "MIT",
   "dependencies": [
     {

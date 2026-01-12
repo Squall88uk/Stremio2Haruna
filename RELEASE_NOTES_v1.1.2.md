@@ -102,13 +102,13 @@ All known security vulnerabilities have been addressed.
 ## 🐛 Bug Reports
 
 Report security issues privately through GitHub's Security tab.  
-Report other issues at: https://github.com/Squall88uk/Stremio2Haruna/issues
+Report other issues at: https://github.com/Jen88uk/Stremio2Haruna/issues
 
 ---
 
 **Previous Releases**:
-- [v1.1.1](https://github.com/Squall88uk/Stremio2Haruna/releases/tag/v1.1.1) - Enhanced Configuration Dialog
-- [v1.1.0](https://github.com/Squall88uk/Stremio2Haruna/releases/tag/v1.1.0) - Configurable Settings
-- [v1.0.0](https://github.com/Squall88uk/Stremio2Haruna/releases/tag/v1.0.0) - Initial Release
+- [v1.1.1](https://github.com/Jen88uk/Stremio2Haruna/releases/tag/v1.1.1) - Enhanced Configuration Dialog
+- [v1.1.0](https://github.com/Jen88uk/Stremio2Haruna/releases/tag/v1.1.0) - Configurable Settings
+- [v1.0.0](https://github.com/Jen88uk/Stremio2Haruna/releases/tag/v1.0.0) - Initial Release
 
 **Upgrade Recommendation**: All users are strongly encouraged to upgrade to v1.1.2 for security improvements.
