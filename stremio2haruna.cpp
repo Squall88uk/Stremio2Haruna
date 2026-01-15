@@ -111,7 +111,46 @@ void Stremio2Haruna::onToggleEnabled(bool enabled) {
   }
 }
 
-void Stremio2Haruna::onQuit() { QApplication::quit(); }
+void Stremio2Haruna::onQuit() {
+  // Proper cleanup to prevent race conditions and hanging
+
+  // 1. Stop clipboard monitoring immediately
+  if (m_clipboardTimer) {
+    m_clipboardTimer->stop();
+  }
+
+  // 2. Disable monitoring to prevent any remaining events from processing
+  m_enabled = false;
+
+  // 3. Disconnect clipboard signals to prevent any new clipboard events
+  if (m_clipboard) {
+    disconnect(m_clipboard, &QClipboard::dataChanged, this,
+               &Stremio2Haruna::onClipboardChanged);
+    disconnect(m_clipboard, &QClipboard::selectionChanged, this,
+               &Stremio2Haruna::onClipboardChanged);
+  }
+
+  // 4. Terminate Haruna process if it's running
+  if (m_harunaProcess) {
+    // Disconnect the finished signal to prevent restart logic
+    disconnect(m_harunaProcess, nullptr, this, nullptr);
+
+    // Try graceful termination first
+    if (m_harunaProcess->state() != QProcess::NotRunning) {
+      m_harunaProcess->terminate();
+
+      // Wait up to 1 second for graceful termination
+      if (!m_harunaProcess->waitForFinished(1000)) {
+        // Force kill if not terminated
+        m_harunaProcess->kill();
+        m_harunaProcess->waitForFinished(500);
+      }
+    }
+  }
+
+  // 5. Now safe to quit
+  QApplication::quit();
+}
 
 bool Stremio2Haruna::isStremioActive() {
   // Check if Stremio is running (not necessarily focused)
@@ -186,8 +225,11 @@ void Stremio2Haruna::launchHaruna(const QString &url) {
   connect(m_harunaProcess,
           QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
           [this]() {
-            // Haruna closed, resume clipboard monitoring
-            m_clipboardTimer->start(m_pollingRate);
+            // Haruna closed, resume clipboard monitoring only if still enabled
+            // This prevents restart during shutdown
+            if (m_enabled && m_clipboardTimer) {
+              m_clipboardTimer->start(m_pollingRate);
+            }
           });
 
   // Use validated and properly encoded URL
