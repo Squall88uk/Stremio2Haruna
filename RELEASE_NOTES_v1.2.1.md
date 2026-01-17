@@ -193,10 +193,6 @@ None reported.
   - Stremio
   - Haruna media player
 
-## 🙏 Acknowledgments
-
-Thanks to the user who reported this critical bug and helped with testing!
-
 ---
 
 **Full Changelog**: v1.2.0...v1.2.1
