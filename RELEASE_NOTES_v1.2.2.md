@@ -167,7 +167,7 @@ None reported.
 
 ## 📋 What's New in v1.2.x Series
 
-- **v1.2.2** (this release) - Config dialog infinite loop fix
+- **v1.2.2** (this release) - Config dialog infinite loop fixes
 - **v1.2.1** - Quit bug fix (application hang on quit)
 - **v1.2.0** - Clipboard URL clearing on launch
 - See previous release notes for details
